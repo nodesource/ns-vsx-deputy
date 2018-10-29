@@ -1,30 +1,35 @@
 {
-    "name": "ns-vsx-deputy",
-    "displayName": "ns-vsx-deputy",
-    "description": "The NodeSource Deputy has your back during your every day Node.js development.",
-    "version": "0.0.1",
-    "publisher": "nodesource",
-    "engines": {
-        "vscode": "^1.28.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-      "*"
-    ],
-    "main": "./extension",
-    "contributes": {
-    },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.21",
-        "eslint": "^4.11.0",
-        "@types/node": "^8.10.25",
-        "@types/mocha": "^2.2.42"
-    }
+  "name": "ns-vsx-deputy",
+  "displayName": "ns-vsx-deputy",
+  "description": "The NodeSource Deputy has your back during your every day Node.js development.",
+  "version": "0.0.1",
+  "publisher": "nodesource",
+  "engines": {
+    "vscode": "^1.28.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension",
+  "contributes": {},
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.21",
+    "eslint": "^4.11.0",
+    "@types/node": "^8.10.25",
+    "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "ansi-regex": "~4.0.0",
+    "ansicolors": "~0.3.2",
+    "text-table": "~0.2.0",
+    "trace": "~3.1.1"
+  }
 }
