@@ -1,4 +1,4 @@
 'use strict'
 
 require('trace')
-require('./promise-multi-resolve')
+require('./deputy-promise-guard')
