@@ -1,8 +1,8 @@
 'use strict'
 
 const { Stack, deserializeFrame }  = require('../lib/stack')
-const colors = require('ansicolors')
-const deputy = colors.brightBlue('[deputy]')
+const { header } = require('../lib/logging')
+
 const {
   deputyInvalidPromiseResolve
 , deputyInvalidPromiseReject
@@ -18,10 +18,10 @@ function logMultiResolve({
   , stackEnd
 }) {
   console.warn(`
-${deputy} Invalid Promise#resolve detected (was resolved or rejected before):
+${header} Invalid Promise#resolve detected (was resolved or rejected before):
   at ${fullPath}:${line}:${column}
-${deputy} Resolved value: ${resolvedValue}
-${deputy} Call Stack around problem origin (frames ${stackStart}-${stackEnd}):
+${header} Resolved value: ${resolvedValue}
+${header} Call Stack around problem origin (frames ${stackStart}-${stackEnd}):
 ${stackTable}
 `)
 }
@@ -36,17 +36,17 @@ function logRejectAfterResolve({
   , stackEnd
 }) {
   console.warn(`
-${deputy} Invalid Promise#reject detected (was resolved or rejected before):
+${header} Invalid Promise#reject detected (was resolved or rejected before):
   at ${fullPath}:${line}:${column}
-${deputy} Reject error: ${err.message}
-${deputy} Call Stack around problem origin (frames ${stackStart}-${stackEnd}):
+${header} Reject error: ${err.message}
+${header} Call Stack around problem origin (frames ${stackStart}-${stackEnd}):
 ${stackTable}
 `)
 }
 
 process.on('multipleResolves', function deputyPromiseGuard(type, promise, value) {
   const stack = new Stack(new Error().stack)
-  const { frame, idx } = stack.find(/^at Promise/)
+  const { frame, idx } = stack.findPromiseErrorOrigin()
   const { fullPath, line, column } = deserializeFrame(frame)
   const { tbl, start, end } = stack.framesTable({ highlightIdx: idx })
 
