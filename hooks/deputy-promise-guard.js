@@ -4,8 +4,8 @@ const { Stack, deserializeFrame }  = require('../lib/stack')
 const colors = require('ansicolors')
 const deputy = colors.brightBlue('[deputy]')
 const {
-  deputyMultiResolve
-, deputyRejectAfterResolve
+  deputyInvalidPromiseResolve
+, deputyInvalidPromiseReject
 } = require('../lib/deputy-debugger')
 
 function logMultiResolve({
@@ -18,8 +18,8 @@ function logMultiResolve({
   , stackEnd
 }) {
   console.warn(`
-${deputy} Promise multiple resolve detected at:
-  ${fullPath}:${line}:${column}
+${deputy} Invalid Promise#resolve detected (was resolved or rejected before):
+  at ${fullPath}:${line}:${column}
 ${deputy} Resolved value: ${resolvedValue}
 ${deputy} Call Stack around problem origin (frames ${stackStart}-${stackEnd}):
 ${stackTable}
@@ -36,9 +36,9 @@ function logRejectAfterResolve({
   , stackEnd
 }) {
   console.warn(`
-${deputy} Promise reject after resolve detected at:
-  ${fullPath}:${line}:${column}
-${deputy} Error: ${err.message}
+${deputy} Invalid Promise#reject detected (was resolved or rejected before):
+  at ${fullPath}:${line}:${column}
+${deputy} Reject error: ${err.message}
 ${deputy} Call Stack around problem origin (frames ${stackStart}-${stackEnd}):
 ${stackTable}
 `)
@@ -60,7 +60,7 @@ process.on('multipleResolves', function deputyPromiseGuard(type, promise, value)
       , stackStart: start
       , stackEnd: end
     })
-    deputyMultiResolve(promise, value)
+    deputyInvalidPromiseResolve(promise, value)
   } else if (type === 'reject') {
       logRejectAfterResolve({
         err: value
@@ -71,6 +71,6 @@ process.on('multipleResolves', function deputyPromiseGuard(type, promise, value)
       , stackStart: start
       , stackEnd: end
     })
-    deputyRejectAfterResolve(promise, value)
+    deputyInvalidPromiseReject(promise, value)
   }
 })
