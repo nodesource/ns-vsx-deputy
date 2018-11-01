@@ -6,4 +6,5 @@ require('trace')
 v8.setFlagsFromString('--stack_trace_limit=100')
 
 // setup promise hooks
-require('./deputy-promise-guard')
+require('./deputy-promise-guard.multi')
+require('./deputy-promise-guard.unhandled')
