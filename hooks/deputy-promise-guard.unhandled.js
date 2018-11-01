@@ -26,7 +26,7 @@ ${stackTable}
 process.on('unhandledRejection', function deputyPromiseGuard(err, promise) {
   // current stack is cut off here even with async stack traces turned on,
   // Therefore we use the stack of the rejection
-  // TODO: need to handle case when err is not Error object
+  // TODO: need to handle case when err is no Error object
 
   const stack = new Stack(err.stack)
   const { frame } = stack.topFrame()
