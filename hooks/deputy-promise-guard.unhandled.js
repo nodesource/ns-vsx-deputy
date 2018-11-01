@@ -2,7 +2,7 @@
 
 const { Stack, deserializeFrame }  = require('../lib/stack')
 const { header } = require('../lib/logging')
-const { deputyRejectionUnhandled } = require('../lib/deputy-debugger')
+const { deputyRejectionUnhandled } = require('../lib/deputy-promise.debugger')
 
 function logUnhandledRejection({
     promise

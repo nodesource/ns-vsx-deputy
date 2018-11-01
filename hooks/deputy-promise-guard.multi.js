@@ -6,7 +6,7 @@ const { header } = require('../lib/logging')
 const {
   deputyInvalidPromiseResolve
 , deputyInvalidPromiseReject
-} = require('../lib/deputy-debugger')
+} = require('../lib/deputy-promise.debugger')
 
 function logMultiResolve({
     resolvedValue

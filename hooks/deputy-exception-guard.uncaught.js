@@ -4,7 +4,7 @@
 
 const { Stack, deserializeFrame }  = require('../lib/stack')
 const { header } = require('../lib/logging')
-const { deputyUnhandledException } = require('../lib/deputy-debugger')
+const { deputyUnhandledException } = require('../lib/deputy-exception.debugger')
 
 function logUnhandledException({
     err
@@ -17,7 +17,8 @@ ${header} An Exception went unhandled!
   at ${fullPath}:${line}:${column}
 ${header} Reject error: ${err.message}
 ${header} Please tick 'Uncaught Exceptions' inside the 'Breakpoints' section
-         of the Debugger pane in the sidebar to break on the line of the exception.'
+         of the Debugger pane in the sidebar to break on the line of the exception and
+         rerun your application in debug mode.
 ${header} The origin of the exception is printed below.
 
 ${stackTable}
