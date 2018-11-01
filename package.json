@@ -14,7 +14,46 @@
     "*"
   ],
   "main": "./extension",
-  "contributes": {},
+  "contributes": {
+    "debuggers": [{
+      "type": "NodeSource",
+      "request": "launch",
+      "label": "NodeSource: deputy",
+      "runtime": "node",
+      "languages": [
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+      ],
+      "configurationSnippets": [ {
+        "type": "node",
+        "label": "NodeSource: deputy",
+        "description": "Run app with the NodeSource deputy enabled.",
+        "body": {
+          "type": "node",
+          "request": "launch",
+          "name": "NS|deputy:${2}",
+          "program": "^\"\\${workspaceFolder}/${1:app.js}\"",
+          "runtimeArgs": [
+            "--stack-trace-limit=100",
+            "-r", "^\"\\${command:deputy.hooksPath}\""
+          ]
+        }
+      }],
+      "initialConfigurations": [{
+          "type": "node",
+          "request": "launch",
+          "name": "NS|deputy:app",
+          "program": "${workspaceFolder}/app.js",
+          "runtimeArgs": [
+            "--stack-trace-limit=100",
+            "-r", "${command:deputy.hooksPath}"
+          ]
+      } ]
+    }
+  ]
+  },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "node ./node_modules/vscode/bin/test"
